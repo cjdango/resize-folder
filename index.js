@@ -1,9 +1,11 @@
 const fs = require('fs');
+const pathModule = require('path');
 const sharp = require('sharp');
 const chokidar = require('chokidar');
 
 const createResizedVersion = path => {
-    const imageType = ['jpeg', 'jpg'].includes(path.split('.')[-1]) ? 'jpeg' : 'png';
+    const imageType = ['jpeg', 'jpg']
+        .includes(pathModule.extname(path)) ? 'jpeg' : 'png';
     const readable = fs.createReadStream(path);
     const writable = fs.createWriteStream('resized/' + path);
     const resizer = sharp()
